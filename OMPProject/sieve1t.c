@@ -35,17 +35,33 @@ int main(int argc, char* argv[]) {
     memset(tab, 0, sizeof(byte) * (size + 1));
 
     cnt = 0;
-    for (i = 2; i <= size; i++) {
-        if (tab[i]) {
-            continue;
+    //for (i = 2; i <= size; i++) {
+    //    if (tab[i]) {
+    //        continue;
+    //    }
+    //    cnt++; // found prime
+    //    for (j = i; j <= size; j += i) {
+    //        tab[j] = 1;
+    //    }
+    //}
+    tab[2] = 1;
+    tab[3] = 1;
+    for (i = 4; i <= size; i++) {
+        int max = sqrt(i);
+        tab[i] = 1;
+        for (j = 2; j <= max; j++) {
+            if (tab[j]) {
+                if (i % j == 0) {
+                    tab[i] = 0;
+                    break;
+                }
+            }
+            else continue;
         }
-        cnt++; // found prime
-        for (j = i; j <= size; j += i) {
-            tab[j] = 1;
-        }
+        if (tab[i]) cnt++;
     }
-
-    log("Primes count: %d\n", cnt);
+    log("Primes count: %d\n", cnt+2);
+    //log("Primes count: %d\n", cnt);
 
     free(tab);
     return 0;
