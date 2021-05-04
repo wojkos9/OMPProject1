@@ -2,7 +2,7 @@
 #include <omp.h>
 #include <math.h>
 
-ulong sievemt(struct alg_options opt) {
+ulong sieve_mt_dom(struct alg_options opt) {
 	byte* tab;
 	ulong *primes;
 	ulong phase1_cnt = sqrt(opt.max);

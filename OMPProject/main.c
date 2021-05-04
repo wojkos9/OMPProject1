@@ -13,7 +13,7 @@
 #define LIST_PRIMES 0
 #define VERBOSE_LVL 1
 
-#define ALGS_RUN_ORDER 2, 1
+#define ALGS_RUN_ORDER 2
 
 static const char *help_str = ""
 "0\tsingle-threaded naive\n"
@@ -28,7 +28,6 @@ int main(int argc, char* argv[]) {
         .verbose = LIST_PRIMES,
         .num_threads = NUM_THREADS};
 
-    algfun *algs[] = {&naive1t, &sieve1t, &sievemt};
     int alg_cmp[] = { ALGS_RUN_ORDER };
 
     DEBUG_LVL = VERBOSE_LVL;
@@ -72,12 +71,13 @@ int main(int argc, char* argv[]) {
 
     for (int i = 0; i < arrlen(alg_cmp); i++) {
         int algn = alg_cmp[i];
-        algfun *fun = algs[algn];
+
+        struct alg_t alg = ALGS_LIST[algn];
 
         log_prime(0); // reset print offset
-        debug(0, "\n[%d] START \"alg %d\" (MIN=%llu, MAX=%llu, threads=%d)\n", algn, algn, opt.min, opt.max, opt.num_threads);
+        debug(0, "\n[%d] START \"%s\" (MIN=%llu, MAX=%llu, threads=%d)\n", algn, alg.name, opt.min, opt.max, opt.num_threads);
 
-        ulong nprimes = fun(opt);
+        ulong nprimes = alg.fun(opt);
 
         debug(1, "\n[%d] Primes count: %lld\n", algn, nprimes);
         debug(0, "[%d] Execution time: %lf s\n", algn, read_timer());

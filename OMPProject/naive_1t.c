@@ -1,7 +1,7 @@
 #include "utils.h"
 #include <math.h>
 
-ulong naive1t(struct alg_options opt) {
+ulong naive_1t(struct alg_options opt) {
 	byte* tab;
 	ulong i, j, cnt = 0;
 

@@ -1,7 +1,7 @@
 #include "utils.h"
 #include "math.h"
 
-ulong sieve1t(struct alg_options opt) {
+ulong sieve_1t(struct alg_options opt) {
 	byte* tab;
 	ulong i, j, cnt;
 

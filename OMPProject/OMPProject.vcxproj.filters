@@ -18,16 +18,16 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sieve1t.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="naive1t.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sievemt.c">
+    <ClCompile Include="naive_1t.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sieve_1t.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sieve_mt_dom.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

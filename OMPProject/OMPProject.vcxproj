@@ -141,9 +141,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
-    <ClCompile Include="naive1t.c" />
-    <ClCompile Include="sieve1t.c" />
-    <ClCompile Include="sievemt.c" />
+    <ClCompile Include="naive_1t.c" />
+    <ClCompile Include="sieve_1t.c" />
+    <ClCompile Include="sieve_mt_dom.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>
