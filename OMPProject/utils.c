@@ -3,7 +3,7 @@
 
 void log_prime(ulong prime) {
 	static int print_cnt;
-	debug("%llu%c", prime, print_cnt < 9 ? '\t' : '\n');
+	debug(0, "%llu%c", prime, print_cnt < 9 ? '\t' : '\n');
 	print_cnt = (print_cnt + 1) % 10;
 }
 
@@ -11,13 +11,15 @@ void log_prime(ulong prime) {
 static LARGE_INTEGER _alg_timer_start;
 static LARGE_INTEGER _alg_timer_end;
 
+int DEBUG_LVL = 0;
+
 void start_timer() {
-    debug("\nStart timer\n");
+    debug(3, "\nStart timer\n");
     QueryPerformanceCounter(&_alg_timer_start);
 }
 
 void stop_timer() {
-    debug("\nStop timer\n");
+    debug(3, "\nStop timer\n");
     QueryPerformanceCounter(&_alg_timer_end);
 }
 

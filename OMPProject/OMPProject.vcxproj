@@ -143,6 +143,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="naive1t.c" />
     <ClCompile Include="sieve1t.c" />
+    <ClCompile Include="sievemt.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>
