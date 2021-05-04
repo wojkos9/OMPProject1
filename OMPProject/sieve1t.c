@@ -4,7 +4,6 @@
 ulong sieve1t(struct alg_options opt) {
 	byte* tab;
 	ulong i, j, cnt;
-	ulong last_prime = 0;
 
 	cnt = opt.max - opt.min + 1;
 
@@ -24,11 +23,6 @@ ulong sieve1t(struct alg_options opt) {
 			continue;
 		}
 
-		if (opt.verbose && i >= opt.min) {
-			last_prime = i;
-			log_prime(i);
-		}
-
 		for (j = 2 * i; j <= opt.max; j += i) {
 			if (!tab[j]) {
 				if (j >= opt.min) {
@@ -43,7 +37,7 @@ ulong sieve1t(struct alg_options opt) {
 	stop_timer();
 
 	if (opt.verbose) {
-		for (i = MAX(last_prime + 1, opt.min); i <= opt.max; i++) {
+		for (i = opt.min; i <= opt.max; i++) {
 			if (!tab[i]) log_prime(i);
 		}
 	}

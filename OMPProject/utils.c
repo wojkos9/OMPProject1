@@ -3,6 +3,10 @@
 
 void log_prime(ulong prime) {
 	static int print_cnt;
+    if (!prime) { // reset offset
+        print_cnt = 0;
+        return;
+    }
 	debug(0, "%llu%c", prime, print_cnt < 9 ? '\t' : '\n');
 	print_cnt = (print_cnt + 1) % 10;
 }

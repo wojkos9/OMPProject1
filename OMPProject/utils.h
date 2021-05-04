@@ -10,6 +10,7 @@ typedef unsigned long long ulong;
 #define debug(lvl, ...) if (DEBUG_LVL >= (lvl)) fprintf(stderr, __VA_ARGS__)
 #define arrlen(x) (sizeof(x)/sizeof(x[0]))
 #define MAX(x, y) ((x)>(y)?(x):(y))
+#define MIN(x, y) ((x)<(y)?(x):(y))
 
 struct alg_options {
 	ulong min;
