@@ -22,13 +22,19 @@ ulong sieve_1t(struct alg_options opt) {
 		if (tab[i]) {
 			continue;
 		}
-
-		for (j = 2 * i; j <= opt.max; j += i) {
+		
+		for (j = 2 * i; j <= max; j += i) {
 			if (!tab[j]) {
+				tab[j] = 1;
 				if (j >= opt.min) {
-					cnt--; // found composite
+					cnt--;
 				}
-				
+			}
+		}
+		ulong left = opt.min + (i - opt.min % i) % i;
+		for (j = MAX(left, j); j <= opt.max; j += i) {
+			if (!tab[j]) {
+				cnt--; // found composite
 				tab[j] = 1;
 			}
 		}

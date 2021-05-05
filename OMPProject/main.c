@@ -12,12 +12,14 @@
 
 #define LIST_PRIMES 0
 #define VERBOSE_LVL 1
+#define ALGS_RUN_ORDER 0,1,2,3,4
 
-#define ALGS_RUN_ORDER 0
-
-static const char *help_str = ""
+static const char* help_str = ""
 "0\tsingle-threaded naive\n"
-"1\tsingle-threaded sieve\n";
+"1\tsingle-threaded sieve\n"
+"2\tmulti-threaded sieve (domain)\n"
+"3\tmulti-threaded sieve (functional)\n"
+"4\tmulti-threaded naive (domain)\n";
 
 int main(int argc, char* argv[]) { 
     int c;

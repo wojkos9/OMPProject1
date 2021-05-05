@@ -6,7 +6,7 @@ ulong naive_mt_dom(struct alg_options opt) {
 	byte* tab;
 	ulong* primes;
 	ulong phase1_cnt = sqrt(opt.max);
-	ulong i, j, cnt = 0;
+	ulong i, j, cnt = 0, k = 0;
 
 	tab = (byte*)malloc(opt.max + 1);
 	primes = (ulong*)malloc((phase1_cnt + 1) * sizeof(*primes));
@@ -23,8 +23,10 @@ ulong naive_mt_dom(struct alg_options opt) {
 	start_timer();
 	cnt = 0;
 	tab[2] = 1;
+	primes[k++] = 2;
 	tab[3] = 1;
-	for (i = 4; i <= opt.max; i++) {
+	primes[k++] = 3;
+	for (i = 4; i <= phase1_cnt; i++) {
 		ulong max = sqrt(i);
 		tab[i] = 1;
 		for (j = 2; j <= max; j++) {
@@ -37,7 +39,8 @@ ulong naive_mt_dom(struct alg_options opt) {
 			else continue;
 		}
 		if (tab[i]) {
-			cnt++;
+			//cnt++;
+			primes[k++] = i;
 			if (opt.verbose > 0) {
 				log_prime(i);
 			}
@@ -48,8 +51,41 @@ ulong naive_mt_dom(struct alg_options opt) {
 	ulong n = opt.max - leftmost + 1;
 	ulong width = ceil((double)n / tn);
 
+#pragma omp parallel
+	{
+		int tid = omp_get_thread_num();
+
+		ulong left = MIN(leftmost + tid * width, opt.max);
+		ulong right = tid == tn - 1 ? opt.max : MIN(left + width - 1, opt.max);
+		ulong local_cnt = 0;
+
+		debug(1, "(%d) %llu..%llu\t\t%lld/%llu\n", tid, left, right, (right - left + 1), width);
+
+		for (int i = left; i <= right; i++) {
+			//ulong p = primes[i];
+			//ulong j = left + (p - left % p) % p;
+			
+			for (j = 0; j < k; j++) {
+				tab[i] = 1;
+				j = primes[j];
+				if (tab[i]) {
+					if (i % j == 0) {
+						local_cnt++; // found composite in range
+						tab[i] = 0;
+						break;
+					}
+				}
+			}
+		}
+#pragma omp atomic
+		cnt += local_cnt;
+	}
+
+
+
 	stop_timer();
 
 	free(tab);
-	return cnt + 2;
+	free(primes);
+	return cnt;
 }

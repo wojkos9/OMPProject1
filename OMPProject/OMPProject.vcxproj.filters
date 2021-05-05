@@ -30,7 +30,11 @@
     <ClCompile Include="sieve_mt_dom.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="naive_mt_dom.c">
+=======
+    <ClCompile Include="sieve_mt_fun.c">
+>>>>>>> 608b132308b967145e9750aca08dd10ae23a858b
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
