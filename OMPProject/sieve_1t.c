@@ -31,7 +31,8 @@ ulong sieve_1t(struct alg_options opt) {
 				}
 			}
 		}
-		for (j = opt.min + (i - opt.min % i) % i; j <= opt.max; j += i) {
+		ulong left = opt.min + (i - opt.min % i) % i;
+		for (j = MAX(left, j); j <= opt.max; j += i) {
 			if (!tab[j]) {
 				cnt--; // found composite
 				tab[j] = 1;
