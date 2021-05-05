@@ -6,14 +6,14 @@
 #include "utils.h"
 #include "algs.h"
 
-#define MAXPRIME    1e8
-#define MINPRIME    MAXPRIME/2
+#define MAXPRIME    1e6
+#define MINPRIME    2
 #define NUM_THREADS 8
 
 #define LIST_PRIMES 0
 #define VERBOSE_LVL 1
 
-#define ALGS_RUN_ORDER 2
+#define ALGS_RUN_ORDER 2, 3
 
 static const char *help_str = ""
 "0\tsingle-threaded naive\n"
