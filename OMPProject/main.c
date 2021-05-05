@@ -7,7 +7,7 @@
 #include "algs.h"
 
 #define MAXPRIME    1e6
-#define MINPRIME    2
+#define MINPRIME    MAXPRIME/2
 #define NUM_THREADS 8
 
 #define LIST_PRIMES 0
@@ -17,7 +17,9 @@
 
 static const char *help_str = ""
 "0\tsingle-threaded naive\n"
-"1\tsingle-threaded sieve\n";
+"1\tsingle-threaded sieve\n"
+"2\tmulti-threaded sieve (domain)\n"
+"3\tmulti-threaded sieve (functional)\n";
 
 int main(int argc, char* argv[]) { 
     int c;
