@@ -7,6 +7,7 @@ extern algfun naive_1t;
 extern algfun sieve_1t;
 extern algfun sieve_mt_dom;
 extern algfun sieve_mt_fun;
+extern algfun sieve_mt_dom_cache;
 extern algfun naive_mt_dom;
 extern algfun naive_mt;
 
@@ -20,6 +21,7 @@ static struct alg_t ALGS_LIST[] = {
 	makealg(sieve_1t),
 	makealg(sieve_mt_dom),
 	makealg(sieve_mt_fun),
+	makealg(sieve_mt_dom_cache),
 	makealg(naive_mt_dom),
 	makealg(naive_mt),
 	

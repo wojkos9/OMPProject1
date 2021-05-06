@@ -11,7 +11,46 @@
     <ClCompile Include="naive_mt.c" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="algs.h" />
     <ClInclude Include="utils.h" />
+=======
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="naive_1t.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sieve_1t.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sieve_mt_dom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="naive_mt_dom.c">
+=======
+    <ClCompile Include="sieve_mt_fun.c">
+>>>>>>> 608b132308b967145e9750aca08dd10ae23a858b
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sieve_mt_dom_cache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="algs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> 14146ae697fbeec9c3da0e506c9bbc6b1cccf285
   </ItemGroup>
 </Project>
