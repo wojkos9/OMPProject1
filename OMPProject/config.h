@@ -7,11 +7,11 @@
 
 #define GB_SIZE 1073741824
 
-#define MAXPRIME	1e7
+#define MAXPRIME	2e7
 #define MINPRIME	sqrt(MAXPRIME)
 #define NUM_THREADS 12
 
 #define LIST_PRIMES 0
 #define VERBOSE_LVL 1
 
-#define ALGS_RUN_ORDER 6, 0
+#define ALGS_RUN_ORDER 7, 6
