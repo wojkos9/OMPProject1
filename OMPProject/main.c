@@ -6,20 +6,14 @@
 #include "utils.h"
 #include "algs.h"
 
-#define MAXPRIME    1e8
-#define MINPRIME    MAXPRIME/2
-#define NUM_THREADS 1
-
-#define LIST_PRIMES 0
-#define VERBOSE_LVL 1
-
-#define ALGS_RUN_ORDER 1, 2
+#include "config.h"
 
 static const char *help_str = ""
 "0\tsingle-threaded naive\n"
 "1\tsingle-threaded sieve\n"
 "2\tmulti-threaded sieve (domain)\n"
-"3\tmulti-threaded sieve (functional)\n";
+"3\tmulti-threaded sieve (functional)\n"
+"4\tmulti-threaded sieve within L1 cache (domain)\n";
 
 int main(int argc, char* argv[]) { 
     int c;
@@ -66,7 +60,7 @@ int main(int argc, char* argv[]) {
 
     if (opt.max - opt.min < 0) {
         debug(0, "ERR Range. 0 primes\n");
-        return 0;
+        return -1;
     }
 
     debug(0, "sizeof(ulong) = %d\n", sizeof(ulong));
@@ -77,7 +71,7 @@ int main(int argc, char* argv[]) {
         struct alg_t alg = ALGS_LIST[algn];
 
         log_prime(0); // reset print offset
-        debug(0, "\n[%d] START \"%s\" (MIN=%llu, MAX=%llu, threads=%d)\n", algn, alg.name, opt.min, opt.max, opt.num_threads);
+        debug(0, "\n[%d] START \"%s\" (MIN=%llu, MAX=%llu=%.2lfGB, threads=%d)\n", algn, alg.name, opt.min, opt.max, (double)opt.max /1024/1024/1024, opt.num_threads);
 
         ulong nprimes = alg.fun(opt);
 
