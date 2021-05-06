@@ -21,10 +21,8 @@ ulong naive_1t(struct alg_options opt) {
 		ulong max = sqrt(i);
 		for (j = 2; j <= max; j++) {
 			if (tab[j]) {
-				debug(2, "%llu %llu\n", i, j);
 				if (i % j == 0) {
 					tab[i] = 0;
-					debug(2, "not %llu\n", i);
 					break;
 				}
 			}
@@ -38,10 +36,8 @@ ulong naive_1t(struct alg_options opt) {
 	for (i = opt.min; i <= opt.max; i++) {
 		for (j = 0; j < k; j++) {
 			if (sqrt(i) >= primes[j]) {
-				debug(2, "%llu %llu\n", i, primes[j]);
 				if (i % primes[j] == 0) {
 				cnt--;
-				debug(2, "not %llu\n", i);
 				break;
 				} 
 			}

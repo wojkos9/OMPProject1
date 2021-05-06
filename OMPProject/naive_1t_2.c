@@ -10,46 +10,43 @@ ulong naive_1t_2(struct alg_options opt) {
 	ulong* primes = malloc(sizeof(*primes) * phase1_cnt);
 
 	start_timer();
+
 	k = 0;
 	cnt = 0;
+
 	ulong left = MAX(opt.min, phase1_cnt + 1);
-	{
-		
-		for (i = 2; i <= phase1_cnt; i++) {
-			byte is_prime = 1;
-			ulong sqi = sqrt(i);
-			for (j = 0; j < k && primes[j] <= sqi; j++) {
-				debug(2, "%llu %llu\n", i, primes[j]);
-				if (i % primes[j] == 0) {
-					is_prime = 0;
-					debug(2, "not %llu\n", i);
-					break;
-				}
-			}
-			if (is_prime) {
-				if (i >= opt.min) cnt++;
-				//if (opt.verbose) log_prime(i);
-				primes[k++] = i;
+
+	for (i = 2; i <= phase1_cnt; i++) {
+		byte is_prime = 1;
+		ulong sqi = sqrt(i);
+		for (j = 0; j < k && primes[j] <= sqi; j++) {
+			if (i % primes[j] == 0) {
+				is_prime = 0;
+				break;
 			}
 		}
-		debug(2, "------end loop------\n");
-		for (ulong i = left; i <= opt.max; i++) {
-			byte is_prime = 1;
-			ulong sqi = sqrt(i);
-			for (ulong j = 0; j < k && primes[j] <= sqi; j++) {
-				debug(2, "%llu %llu\n", i, primes[j]);
-				if (i % primes[j] == 0) {
-					is_prime = 0;
-					debug(2, "not %llu\n", i);
-					break;
-				}
-			}
-			if (is_prime) {
-				//if (opt.verbose) log_prime(i);
-				cnt++;
-			}
+		if (is_prime) {
+			if (i >= opt.min) cnt++;
+			if (opt.verbose) log_prime(i);
+			primes[k++] = i;
 		}
 	}
+
+	for (ulong i = left; i <= opt.max; i++) {
+		byte is_prime = 1;
+		ulong sqi = sqrt(i);
+		for (ulong j = 0; j < k && primes[j] <= sqi; j++) {
+			if (i % primes[j] == 0) {
+				is_prime = 0;
+				break;
+			}
+		}
+		if (is_prime) {
+			if (opt.verbose) log_prime(i);
+			cnt++;
+		}
+	}
+
 	stop_timer();
 
 	free(primes);
