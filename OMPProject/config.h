@@ -12,4 +12,4 @@
 #define LIST_PRIMES 0
 #define VERBOSE_LVL 1
 
-#define ALGS_RUN_ORDER 4
+#define ALGS_RUN_ORDER 2, 4

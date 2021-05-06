@@ -8,12 +8,12 @@
 
 #include "config.h"
 
-static const char *help_str = ""
+static const char* help_str = ""
 "0\tsingle-threaded naive\n"
 "1\tsingle-threaded sieve\n"
-"2\tmulti-threaded sieve (domain)\n"
 "3\tmulti-threaded sieve (functional)\n"
-"4\tmulti-threaded sieve within L1 cache (domain)\n";
+"4\tmulti-threaded sieve within L1 cache (domain)\n"
+"5\tnaive v2";
 
 int main(int argc, char* argv[]) { 
     int c;
