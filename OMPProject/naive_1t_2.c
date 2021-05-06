@@ -2,7 +2,7 @@
 #include <math.h>
 #include <omp.h>
 
-ulong naive_mt(struct alg_options opt) {
+ulong naive_1t_2(struct alg_options opt) {
 	ulong i, j, k, cnt;
 
 	ulong phase1_cnt = sqrt(opt.max);

@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="naive_1t.c" />
+    <ClCompile Include="naive_1t_2.c" />
     <ClCompile Include="naive_mt.c" />
     <ClCompile Include="naive_mt_dom.c" />
     <ClCompile Include="sieve_1t.c" />

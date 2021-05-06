@@ -1,19 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "config.h"
 #include <omp.h>
 #include "getopt.h"
 #include "utils.h"
 #include "algs.h"
 
-#define MAXPRIME    49
-#define MINPRIME    10
-#define NUM_THREADS 8
-
-#define LIST_PRIMES 0
-#define VERBOSE_LVL 1
-#define ALGS_RUN_ORDER 0,1
-
+#include "config.h"
 
 static const char* help_str = ""
 "0\tsingle-threaded naive\n"
