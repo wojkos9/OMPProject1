@@ -31,30 +31,23 @@ ulong naive_mt(struct alg_options opt) {
 			primes[k++] = i;
 		}
 	}
-#pragma omp parallel
-	{
-		ulong local_cnt = 0;
-#pragma omp for schedule(dynamic)
-		for (ulong i = left; i <= opt.max; i++) {
-			int tid = omp_get_thread_num();
-			debug(2, "%d %llu\n", tid, i);
-			byte is_prime = 1;
-			ulong sqi = sqrt(i);
-			for (ulong j = 0; j < k && primes[j] <= sqi; j++) {
-				if (i % primes[j] == 0) {
-					is_prime = 0;
-					break;
-				}
-			}
-			if (is_prime) {
-				if (opt.verbose) log_prime(i);
-				local_cnt++;
+#pragma omp parallel for schedule(dynamic) reduction(+: cnt)
+	for (ulong i = left; i <= opt.max; i++) {
+		int tid = omp_get_thread_num();
+		debug(2, "%d %llu\n", tid, i);
+		byte is_prime = 1;
+		ulong sqi = sqrt(i);
+		for (ulong j = 0; j < k && primes[j] <= sqi; j++) {
+			if (i % primes[j] == 0) {
+				is_prime = 0;
+				break;
 			}
 		}
-#pragma omp atomic
-		cnt += local_cnt;
+		if (is_prime) {
+			if (opt.verbose) log_prime(i);
+			cnt++;
+		}
 	}
-	
 
 	stop_timer();
 

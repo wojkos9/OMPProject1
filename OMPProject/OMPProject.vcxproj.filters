@@ -41,7 +41,7 @@
     <ClCompile Include="naive_mt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="naive_mt_dom.c">
+    <ClCompile Include="BAD_ALG.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sieve_1t.c">

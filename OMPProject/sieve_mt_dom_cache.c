@@ -48,37 +48,28 @@ ulong sieve_mt_dom_cache(struct alg_options opt) {
 	}
 	// END compute first set
 
-	int tn = opt.num_threads;
 	ulong leftmost = MAX(phase1_cnt + 1, opt.min);
 	ulong n = opt.max - leftmost + 1;
-	ulong width = ceil((double)n / tn);
 	int num_frags = ceil((double)n / CACHE_SIZE);
 
-#pragma omp parallel
-	{
-		int tid = omp_get_thread_num();
-		ulong local_cnt = 0;
-#pragma omp for
-		for (int t = 0; t < num_frags; t++) {
-			ulong left = MIN(leftmost + t * CACHE_SIZE, opt.max);
-			ulong right = t == num_frags - 1 ? opt.max : MIN(left + CACHE_SIZE - 1, opt.max);
 
-			debug(2, "(%d) %llu..%llu\t\t%lld/%llu\n", tid, left, right, (right - left + 1), CACHE_SIZE);
+#pragma omp parallel for reduction(-: cnt)
+	for (int t = 0; t < num_frags; t++) {
+		ulong left = MIN(leftmost + t * CACHE_SIZE, opt.max);
+		ulong right = t == num_frags - 1 ? opt.max : MIN(left + CACHE_SIZE - 1, opt.max);
 
-			for (int i = 0; i < k; i++) {
-				ulong p = primes[i];
-				ulong j = left + (p - left % p) % p;
-				for (; j <= right; j += p) {
-					if (!tab[j]) {
-						local_cnt++; // found composite in range
-						tab[j] = 1;
-					}
+		debug(2, "(%d) %llu..%llu\t\t%lld/%llu\n", omp_get_thread_num(), left, right, (right - left + 1), CACHE_SIZE);
+
+		for (int i = 0; i < k; i++) {
+			ulong p = primes[i];
+			ulong j = left + (p - left % p) % p;
+			for (; j <= right; j += p) {
+				if (!tab[j]) {
+					cnt--; // found composite in range
+					tab[j] = 1;
 				}
 			}
 		}
-		
-#pragma omp atomic
-		cnt -= local_cnt;
 	}
 
 	stop_timer();

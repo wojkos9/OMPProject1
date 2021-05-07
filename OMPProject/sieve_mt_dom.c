@@ -51,28 +51,25 @@ ulong sieve_mt_dom(struct alg_options opt) {
 	ulong n = opt.max - leftmost + 1;
 	ulong width = ceil((double)n / tn);
 
-#pragma omp parallel
+#pragma omp parallel reduction(-: cnt)
 	{
 		int tid = omp_get_thread_num();
 		
 		ulong left = MIN(leftmost + tid * width, opt.max);
 		ulong right = tid == tn - 1 ? opt.max : MIN(left + width - 1, opt.max);
-		ulong local_cnt = 0;
 
-		debug(1, "(%d) %llu..%llu\t\t%lld/%llu\n", tid, left, right, (right-left+1), width);
+		debug(2, "(%d) %llu..%llu\t\t%lld/%llu\n", tid, left, right, (right-left+1), width);
 
 		for (int i = 0; i < k; i++) {
 			ulong p = primes[i];
 			ulong j = left + (p - left % p) % p;
 			for (; j <= right; j += p) {
 				if (!tab[j]) {
-					local_cnt++; // found composite in range
+					cnt--; // found composite in range
 					tab[j] = 1;
 				}
 			}
 		}
-#pragma omp atomic
-		cnt -= local_cnt;
 	}
 
 	stop_timer();

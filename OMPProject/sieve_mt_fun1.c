@@ -1,6 +1,7 @@
 #include "utils.h"
 #include <omp.h>
 #include <math.h>
+#include "config.h"
 
 ulong sieve_mt_fun1(struct alg_options opt) {
 	byte* tab;
@@ -9,7 +10,7 @@ ulong sieve_mt_fun1(struct alg_options opt) {
 	ulong cnt = 0;
 	ulong i, j, k = 0;
 
-	cnt = opt.max - opt.min + 1;
+	cnt = 0;
 
 	tab = (byte*)malloc(opt.max + 1);
 	primes = (ulong *)malloc((phase1_cnt+1) * sizeof(*primes));
@@ -36,9 +37,6 @@ ulong sieve_mt_fun1(struct alg_options opt) {
 		if (i <= max) {
 			for (j = 2 * i; j <= phase1_cnt; j += i) {
 				if (!tab[j]) {
-					if (j >= opt.min) {
-						cnt--; // found composite
-					}
 					tab[j] = 1;
 				}
 			}
@@ -46,36 +44,37 @@ ulong sieve_mt_fun1(struct alg_options opt) {
 	}
 	// END compute first set
 
-	int tn = opt.num_threads;
 	ulong leftmost = MAX(phase1_cnt + 1, opt.min);
-	ulong n = opt.max - leftmost + 1;
-	ulong width = ceil((double)n / tn);
+	ulong left = leftmost;
+	ulong right = opt.max;
 
 #pragma omp parallel
 	{
-		int tid = omp_get_thread_num();
 
-		ulong left = leftmost;
-		ulong right = opt.max;
-		ulong local_cnt = 0;
-
-		for (int i = tid; i < k; i += tn) {
+#pragma omp for schedule(dynamic)
+		for (int i = 0; i < k; i ++) {
 			ulong p = primes[i];
 			ulong j0 = left + (p - left % p) % p;
 			ulong j = j0;
 			for (; j <= right; j += p) {
-//#pragma omp critical
 				if (!tab[j]) {
-					local_cnt++; // found composite in range
 					tab[j] = 1;
 				}
 			}
 		}
-#pragma omp atomic
-		cnt -= local_cnt;
+#ifdef COUNT
+#pragma omp for reduction(+:cnt)
+		for (j = opt.min; j <= opt.max; j++) {
+			if (!tab[j]) {
+				cnt++;
+			}
+		}
+#endif
 	}
 
 	stop_timer();
+
+
 
 	if (opt.verbose) {
 		for (i = opt.min; i <= opt.max; i++) {
