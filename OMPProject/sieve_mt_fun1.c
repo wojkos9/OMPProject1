@@ -54,8 +54,7 @@ ulong sieve_mt_fun1(struct alg_options opt) {
 #pragma omp for schedule(dynamic)
 		for (int i = 0; i < k; i ++) {
 			ulong p = primes[i];
-			ulong j0 = left + (p - left % p) % p;
-			ulong j = j0;
+			ulong j = left + (p - left % p) % p;
 			for (; j <= right; j += p) {
 				if (!tab[j]) {
 					tab[j] = 1;

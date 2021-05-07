@@ -34,7 +34,6 @@ ulong naive_mt(struct alg_options opt) {
 #pragma omp parallel for schedule(dynamic) reduction(+: cnt)
 	for (ulong i = left; i <= opt.max; i++) {
 		int tid = omp_get_thread_num();
-		debug(2, "%d %llu\n", tid, i);
 		byte is_prime = 1;
 		ulong sqi = sqrt(i);
 		for (ulong j = 0; j < k && primes[j] <= sqi; j++) {

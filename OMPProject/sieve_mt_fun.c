@@ -53,8 +53,7 @@ ulong sieve_mt_fun(struct alg_options opt) {
 
 		for (int i = tid; i < k; i += tn) {
 			ulong p = primes[i];
-			ulong j0 = left + (p - left % p) % p;
-			ulong j = j0;
+			ulong j = left + (p - left % p) % p;
 			for (; j <= right; j += p) {
 				if (!tab[j]) {
 					tab[j] = 1;
