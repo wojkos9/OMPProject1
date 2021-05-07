@@ -58,8 +58,6 @@ ulong sieve_mt_dom_cache(struct alg_options opt) {
 		ulong left = MIN(leftmost + t * CACHE_SIZE, opt.max);
 		ulong right = t == num_frags - 1 ? opt.max : MIN(left + CACHE_SIZE - 1, opt.max);
 
-		debug(2, "(%d) %llu..%llu\t\t%lld/%llu\n", omp_get_thread_num(), left, right, (right - left + 1), CACHE_SIZE);
-
 		for (int i = 0; i < k; i++) {
 			ulong p = primes[i];
 			ulong j = left + (p - left % p) % p;

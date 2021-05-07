@@ -44,13 +44,12 @@ ulong sieve_mt_fun(struct alg_options opt) {
 
 	int tn = opt.num_threads;
 	ulong leftmost = MAX(phase1_cnt + 1, opt.min);
+	ulong left = leftmost;
+	ulong right = opt.max;
 
 #pragma omp parallel
 	{
 		int tid = omp_get_thread_num();
-
-		ulong left = leftmost;
-		ulong right = opt.max;
 
 		for (int i = tid; i < k; i += tn) {
 			ulong p = primes[i];
