@@ -18,14 +18,14 @@ struct alg_t {
 };
 
 static struct alg_t ALGS_LIST[] = {
-	makealg(naive_1t),
-	makealg(sieve_1t),
-	makealg(sieve_mt_dom),
-	makealg(sieve_mt_fun),
-	makealg(sieve_mt_dom_cache),
-	makealg(naive_mt_dom),
-	makealg(naive_1t_2),
-	makealg(naive_mt),
+	makealg(naive_1t_2),			// 0
+	makealg(sieve_1t),				// 1
+	makealg(sieve_mt_dom),			// 2
+	makealg(sieve_mt_fun),			// 3
+	makealg(sieve_mt_dom_cache),	// 4
+	makealg(naive_mt),				// 5
+	//makealg(naive_mt_dom),			// 6
+	
 	
 	
 };

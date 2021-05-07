@@ -34,7 +34,7 @@ ulong naive_mt(struct alg_options opt) {
 #pragma omp parallel
 	{
 		ulong local_cnt = 0;
-#pragma omp for
+#pragma omp for schedule(dynamic)
 		for (ulong i = left; i <= opt.max; i++) {
 			int tid = omp_get_thread_num();
 			debug(2, "%d %llu\n", tid, i);

@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{562f3f1e-26f1-4dab-b9fa-c9e865eb2b05}</ProjectGuid>
+    <ProjectGuid>{c232be26-4a51-4264-b143-ce1478f92335}</ProjectGuid>
     <RootNamespace>OMPProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -143,6 +143,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="algs.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="getopt.h" />
+    <ClInclude Include="utils.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="naive_1t.c" />
     <ClCompile Include="naive_1t_2.c" />
@@ -152,12 +158,8 @@
     <ClCompile Include="sieve_mt_dom.c" />
     <ClCompile Include="sieve_mt_dom_cache.c" />
     <ClCompile Include="sieve_mt_fun.c" />
+    <ClCompile Include="sieve_mt_fun1.c" />
     <ClCompile Include="utils.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="algs.h" />
-    <ClInclude Include="config.h" />
-    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
